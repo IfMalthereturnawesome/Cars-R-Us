@@ -71,6 +71,15 @@ public class UserWithRoles implements UserDetails {
         this.email = email;
     }
 
+    public UserWithRoles(String username, String email, String password, boolean enabled, LocalDateTime created, LocalDateTime edited) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+        this.created = created;
+        this.edited = edited;
+    }
+
     public void setPassword(String pw){
         this.password = passwordEncoder.encode(pw);
     }
