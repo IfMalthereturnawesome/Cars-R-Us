@@ -31,9 +31,10 @@ class MemberRespositoryTest {
 
     @Test
     void testFindMemberByUsername(){
-        Member found = memberRespository.findMemberByUsername("Kal");
-        assertEquals(member1,found.getUsername());
-        assertEquals("Kal",found.getUsername());
+        Member found = memberRespository.findMemberByUsername("Jakob");
+        assertEquals(member2,found.getUsername());
+        assertNotEquals(member1,found.getUsername());
+        assertEquals("Jakob",found.getUsername());
     }
 
 }
