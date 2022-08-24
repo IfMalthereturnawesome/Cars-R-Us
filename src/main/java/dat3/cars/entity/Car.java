@@ -1,6 +1,5 @@
 package dat3.cars.entity;
 
-import dat3.security.entity.UserWithRoles;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,7 +21,7 @@ public class Car {
     private String model;
     @Column(nullable = false,length = 450)
     private double pricePrDay;
-    @Column(length = 450)
+    @Column(nullable = false,length = 450)
     private double bestDiscount;
 
     @CreationTimestamp
