@@ -62,4 +62,6 @@ public class Member extends UserWithRoles {
         this.approved = approved;
         this.ranking = ranking;
     }
+
+
 }
