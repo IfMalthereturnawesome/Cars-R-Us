@@ -27,22 +27,24 @@ public class MemberController {
         return memberService.findMembers();
     }
 
+
     //Security ADMIN
     @GetMapping(path = "/{username}")
-    MemberResponse getMemberById(@PathVariable String username) throws Exception {return null;}
+    MemberResponse getMemberById(@PathVariable String username) throws Exception {
+
+        return memberService.findMemberByUsername(username);
+    }
 
     //Security --> USER
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    //@PostMapping // same as above when you are using @RestController
+   // @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping // same as above when you are using @RestController
     MemberResponse addMember(@RequestBody MemberRequest body){
-        return null;
+        MemberResponse res = memberService.addMember(body);
+        System.out.println("test Debugging");
+        return res;
+
     }
 
-    //Just to demonstrate that clients can control type of what they get back
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_HTML_VALUE)
-    String addMember2(@RequestBody MemberRequest body){
-        return null;
-    }
 
     //Security USER/ADMIN ??
     @PutMapping("/{username}")

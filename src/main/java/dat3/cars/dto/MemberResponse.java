@@ -43,5 +43,7 @@ public class MemberResponse {
             this.ranking = m.getRanking();
         }
     }
+
+
 }
 
