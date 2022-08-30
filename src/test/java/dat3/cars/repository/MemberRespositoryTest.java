@@ -20,21 +20,20 @@ class MemberRespositoryTest {
     static String member2;
     @BeforeAll
     public static void setupData(@Autowired MemberRespository memberRespository){
-        Member m1 = new Member("Kal","amdo@","test12","Karl","Hansen","Graver","København",2400,1,2);
-        Member m2 = new Member("Jakob","aodm@","test12",true, LocalDateTime.now(),LocalDateTime.now(),"Jakob","Jak","Dad","AFA",2400,2,3);
+        Member m1 = new Member("Kal","amdo@","test12","Karl","Hansen","Graver","København","2400",true,2);
+
         memberRespository.save(m1);
-        memberRespository.save(m2);
+
 
         member1 = m1.getUsername();
-        member2 = m2.getUsername();
+
     }
 
     @Test
     void testFindMemberByUsername(){
-        Member found = memberRespository.findMemberByUsername("Jakob");
-        assertEquals(member2,found.getUsername());
+        Member found = memberRespository.findMemberByUsername("Kal");
         assertNotEquals(member1,found.getUsername());
-        assertEquals("Jakob",found.getUsername());
+        assertEquals("Kal",found.getUsername());
     }
 
 }

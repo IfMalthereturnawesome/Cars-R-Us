@@ -1,34 +1,39 @@
 package dat3.cars.entity;
 
-import dat3.security.entity.Role;
-import dat3.security.entity.UserWithRoles;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.security.core.userdetails.User;
 
+import dat3.security.entity.UserWithRoles;
+import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity
+
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
+@AllArgsConstructor
+@Entity
 public class Member extends UserWithRoles {
 
+    // Id is username from UserWithRoles
+
+    //Make sure you understand why we CANNOT make any of the fields private using the inheritance strategy we are
+    @Column(length = 30) //I Wish could be made NOT NULL
     private String firstName;
 
+    @Column(length = 50)
+    private String lastName; //I Wish could be made NOT NULL
 
-    private String lastname;
-
+    @Column(length = 50)  //I Wish could be made NOT NULL
     private String street;
 
+    @Column(length = 50) //I Wish could be made NOT NULL
     private String city;
 
-    private int zip;
+    @Column(length = 50) //I Wish could be made NOT NULL
+    private String zip;
 
-    private int approved;
-
+    private boolean approved;
     private int ranking;
 
 
@@ -41,21 +46,19 @@ public class Member extends UserWithRoles {
         this.firstName = firstName;
     }
 
-    public Member(String user, String email, String password, String firstName, String lastname, String street, String city, int zip, int approved, int ranking) {
-        super(user, email, password);
+    public Member(String user, String password, String email, String firstName, String lastName, String street, String city, String zip) {
+        super(user, password, email);
         this.firstName = firstName;
-        this.lastname = lastname;
+        this.lastName = lastName;
         this.street = street;
         this.city = city;
         this.zip = zip;
-        this.approved = approved;
-        this.ranking = ranking;
     }
 
-    public Member(String username, String email, String password, boolean enabled, LocalDateTime created, LocalDateTime edited, String firstName, String lastname, String street, String city, int zip, int approved, int ranking) {
-        super(username, email, password, enabled, created, edited);
+    public Member(String user, String password, String email, String firstName, String lastName, String street, String city, String zip, boolean approved, int ranking) {
+        super(user, password, email);
         this.firstName = firstName;
-        this.lastname = lastname;
+        this.lastName = lastName;
         this.street = street;
         this.city = city;
         this.zip = zip;
