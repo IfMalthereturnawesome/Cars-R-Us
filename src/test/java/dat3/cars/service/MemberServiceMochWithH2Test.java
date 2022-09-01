@@ -25,9 +25,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 class MemberServiceMockWithH2Test {
 
-    public  MemberService memberService;
+    public MemberService memberService;
 
-    public  static MemberRespository memberRepository;
+    public static MemberRespository memberRepository;
 
     @BeforeAll
     public static void setupData(@Autowired MemberRespository member_Repository){
@@ -53,7 +53,14 @@ class MemberServiceMockWithH2Test {
     }
 
     @Test
-    void editMember() {
+    void editMember() throws Exception {
+
+        MemberRequest request = new MemberRequest(new Member("m1", "pw", "m1@a.dk", "aa", "aaa", "xxxx", "yyyy", "2000"));
+        memberService.editMember(request,"m1");
+        MemberResponse response = memberService.findMemberByUsername("m1");
+        assertEquals("xxxx", response.getStreet());
+        assertEquals("yyyy", response.getCity());
+        assertEquals("2000", response.getZip());
     }
 
     @Test

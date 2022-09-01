@@ -43,7 +43,7 @@ public class CarService {
         car.setModel(body.getModel());
         car.setPricePrDay(body.getPricePrDay());
         carRepository.save(car);
-        throw new ResponseStatusException(HttpStatus.OK, "Car updated");
+
     }
     
     public List<CarResponse> getCars(){
