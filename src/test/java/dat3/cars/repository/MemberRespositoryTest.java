@@ -17,7 +17,7 @@ class MemberRespositoryTest {
     MemberRespository memberRespository;
 
     static String member1;
-    static String member2;
+
     @BeforeAll
     public static void setupData(@Autowired MemberRespository memberRespository){
         Member m1 = new Member("Kal","amdo@","test12","Karl","Hansen","Graver","København","2400",true,2);
@@ -32,7 +32,7 @@ class MemberRespositoryTest {
     @Test
     void testFindMemberByUsername(){
         Member found = memberRespository.findMemberByUsername("Kal");
-        assertNotEquals(member1,found.getUsername());
+        assertEquals(member1,found.getUsername());
         assertEquals("Kal",found.getUsername());
     }
 

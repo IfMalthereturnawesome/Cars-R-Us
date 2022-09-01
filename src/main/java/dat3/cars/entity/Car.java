@@ -1,7 +1,6 @@
 package dat3.cars.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,6 +10,9 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
+@AllArgsConstructor
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,5 +42,10 @@ public class Car {
         this.bestDiscount = bestDiscount;
     }
 
-
+    public Car(int id, String brand, String model, double pricePrDay) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.pricePrDay = pricePrDay;
+    }
 }
