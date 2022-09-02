@@ -28,7 +28,7 @@ class CarServiceTestH2Test {
         carRepository = car_Repository;
         List<Car> cars = List.of(
                 new Car("BMW", "X12", 1200, 200),
-                new Car("BMW", "X13", 1300, 300)
+                new Car("Opel", "X13", 1300, 300)
         );
         carRepository.saveAll(cars);
     }
@@ -74,45 +74,84 @@ class CarServiceTestH2Test {
 
     @Test
     void getCars() {
+        List<CarResponse> cars = carService.getCars();
+        assertEquals(2,cars.size());
+        assertThat(cars,hasItem(hasProperty("brand",is("BMW"))));
+        assertThat(cars,hasItem(hasProperty("brand",is("Opel"))));
+
     }
 
     @Test
-    void findCarById() {
+    void findCarById() throws Exception {
+
+        CarResponse response = carService.findCarById(1);
+        assertEquals("BMW",response.getBrand());
     }
 
     @Test
-    void deleteCar() {
+    void deleteCar() throws Exception {
+
+        carService.deleteCar(1);
+        assertEquals(1,carRepository.count());
+        assertFalse(carRepository.findById(1).isPresent());
     }
 
     @Test
     void deleteAllCars() {
+
+        carService.deleteAllCars();
+        assertEquals(0,carRepository.count());
     }
 
     @Test
     void deleteAllCarsByBrand() {
+        carService.deleteAllCarsByBrand("BMW");
+        assertEquals(1,carRepository.count());
+        assertFalse(carRepository.findById(1).isPresent());
     }
 
     @Test
     void setBestDiscount() {
+        carService.setBestDiscount(1,10);
+        assertEquals(10,carRepository.findById(1).get().getBestDiscount());
     }
 
     @Test
-    void findCarByBrand() {
+    void findCarByBrand() throws Exception {
+
+        CarResponse car =  carService.findCarByBrand("BMW");
+        assertNotEquals("Opel",car.getBrand());
+        assertEquals("BMW",car.getBrand());
     }
 
     @Test
     void findAllByBrand() {
+
+        List<CarResponse> cars = carService.findAllByBrand("BMW");
+        assertEquals(1,cars.size());
+        assertEquals("BMW",cars.get(0).getBrand());
     }
 
     @Test
     void findAllByModel() {
+
+        List<CarResponse> cars = carService.findAllByModel("X12");
+        assertEquals(1,cars.size());
+        assertEquals("X12",cars.get(0).getModel());
     }
 
     @Test
-    void findCarByModel() {
+    void findCarByModel() throws Exception {
+
+        CarResponse car = carService.findCarByModel("X12");
+        assertEquals("X12",car.getModel());
     }
 
     @Test
-    void findCarByPricePrDay() {
+    void findCarByPricePrDay() throws Exception {
+
+        CarResponse car = carService.findCarByPricePrDay(1200);
+        assertEquals(1200,car.getPricePrDay());
+        assertNotEquals(12300,car.getPricePrDay());
     }
 }
