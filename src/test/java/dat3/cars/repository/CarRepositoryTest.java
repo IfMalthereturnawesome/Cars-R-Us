@@ -32,7 +32,7 @@ class CarRepositoryTest {
     @Test
     void testFindCarByID(){
         Car found = carRepository.findById(1).get();
-        assertEquals(car1,found.getId());
+
         assertEquals("Opel",found.getBrand());
 
     }
