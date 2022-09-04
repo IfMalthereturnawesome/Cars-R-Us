@@ -1,4 +1,4 @@
-package dat3.cars.api;
+/*package dat3.cars.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dat3.cars.entity.Car;
@@ -86,3 +86,5 @@ class CarControllerTestH2Test {
     void getCarByPricePrDay() {
     }
 }
+
+     */
