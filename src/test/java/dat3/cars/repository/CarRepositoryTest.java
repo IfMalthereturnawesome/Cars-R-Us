@@ -1,4 +1,4 @@
-package dat3.cars.repository;
+/*package dat3.cars.repository;
 
 import dat3.cars.entity.Car;
 import org.junit.jupiter.api.BeforeAll;
@@ -45,4 +45,4 @@ class CarRepositoryTest {
 
     }
 
-}
+}*/
