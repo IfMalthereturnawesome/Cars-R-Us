@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
-    private MemberRespository memberRepository;
+    private final MemberRespository memberRepository;
 
     public MemberService(MemberRespository memberRepository) {
         this.memberRepository = memberRepository;

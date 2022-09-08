@@ -1,7 +1,13 @@
 package dat3.cars.configuration;
 
+import dat3.cars.entity.Car;
 import dat3.cars.entity.Member;
+import dat3.cars.entity.Rental;
+import dat3.cars.entity.Reservation;
+import dat3.cars.repository.CarRepository;
 import dat3.cars.repository.MemberRespository;
+import dat3.cars.repository.RentalRepository;
+import dat3.cars.repository.ReservationRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import org.springframework.boot.ApplicationArguments;
@@ -9,16 +15,24 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import dat3.security.repository.UserWithRolesRepository;
 
+import java.time.LocalDate;
+
 @Controller
 public class SetupDevUsers implements ApplicationRunner {
 
     UserWithRolesRepository userWithRolesRepository;
     MemberRespository memberRespository;
+    CarRepository carRepository;
+    RentalRepository rentalRepository;
+    ReservationRepository reservationRepository;
     String passwordUsedByAll;
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, MemberRespository memberRespository) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, MemberRespository memberRespository, CarRepository carRepository, RentalRepository rentalRepository, ReservationRepository reservationRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.memberRespository = memberRespository;
+        this.carRepository = carRepository;
+        this.rentalRepository = rentalRepository;
+        this.reservationRepository = reservationRepository;
         passwordUsedByAll = "test12";
     }
 
@@ -31,6 +45,25 @@ public class SetupDevUsers implements ApplicationRunner {
         m2.addRole(Role.USER);
         memberRespository.save(m2);
         setupUserWithRoleUsers();
+        Car c1 = new Car("BMW","M3",550,100);
+        Car c2 = new Car("BMW","M1",750,100);
+        carRepository.save(c1);
+        carRepository.save(c2);
+
+        Reservation r1 = Reservation.builder().car(c1).member(m1).rentalDate(LocalDate.now()).build();
+        Reservation r2 = Reservation.builder().car(c2).member(m2).rentalDate(LocalDate.now()).build();
+
+        m1.addReservation(r1);
+        m2.addReservation(r2);
+/*
+        Rental rental1 = Rental.builder().car(c1).member(m1).rentalDate(LocalDate.now()).pricePrDay(100).build();
+        Rental rental2 = Rental.builder().car(c2).member(m2).rentalDate(LocalDate.now()).pricePrDay(100).build();
+
+        m1.addRental(rental1);
+        m2.addRental(rental2);*/
+        memberRespository.save(m1);
+        memberRespository.save(m2);
+
     }
 
     /*****************************************************************************************
