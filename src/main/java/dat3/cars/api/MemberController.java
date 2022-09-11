@@ -26,6 +26,11 @@ public class MemberController {
         return memberService.getMembers();
     }
 
+    @GetMapping("/withreservation")
+    List<MemberResponse> getMembersWithReservation(){
+
+        return memberService.getMembersWithReservation();
+    }
 
     //Security ADMIN
     @GetMapping(path = "/{username}")
@@ -48,16 +53,21 @@ public class MemberController {
     //Security USER/ADMIN ??
     @PutMapping("/{username}")
     ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username){
-        return null;
+        memberService.editMember(body, username);
+        return ResponseEntity.ok(true);
     }
 
     //Security ADMIN
     @PatchMapping("/ranking/{username}/{value}")
-    void setRankingForUser(@PathVariable String username, @PathVariable int value) {}
+    void setRankingForUser(@PathVariable String username, @PathVariable int value) {
+        memberService.setRankingForUser(username, value);
+    }
 
     // Security ADMIN
     @DeleteMapping("/{username}")
-    void deleteMemberByUsername(@PathVariable String username) {}
+    void deleteMemberByUsername(@PathVariable String username) {
+        memberService.deleteByUsername(username);
+    }
 
 
 }
