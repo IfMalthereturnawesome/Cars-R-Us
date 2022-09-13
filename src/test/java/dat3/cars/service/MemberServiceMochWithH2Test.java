@@ -4,6 +4,7 @@ import dat3.cars.dto.MemberRequest;
 import dat3.cars.dto.MemberResponse;
 import dat3.cars.entity.Member;
 import dat3.cars.repository.MemberRespository;
+import dat3.cars.service.MemberService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +22,7 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+/*
 @DataJpaTest
 class MemberServiceMockWithH2Test {
 
@@ -50,7 +51,7 @@ class MemberServiceMockWithH2Test {
         MemberRequest request = new MemberRequest(m);
         memberService.addMember(request);
         assertEquals(3,memberRepository.count());
-    }*/
+    }
 
     @Test
     void editMember() throws Exception {
@@ -70,7 +71,9 @@ class MemberServiceMockWithH2Test {
         assertThat(response, containsInAnyOrder(hasProperty("email", is("m1@a.dk")), hasProperty("email", is("mm@a.dk"))));
     } */
 
-    @Test
+import org.junit.jupiter.api.Test;
+/*
+@Test
     void findMemberByUsername() throws Exception {
         MemberResponse response = memberService.findMemberByUsername("m1");
         assertEquals("m1@a.dk",response.getEmail());
@@ -84,5 +87,5 @@ class MemberServiceMockWithH2Test {
     @Test
     void setRankingForUser() {
     }
+            */
 
-}
