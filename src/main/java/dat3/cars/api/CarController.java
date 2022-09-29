@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/cars")
 public class CarController {
 
@@ -31,6 +32,7 @@ public class CarController {
         CarResponse res = carService.addCar(body);
         return res;
     }
+
 
     @GetMapping(path = "/car/{id}")
     CarResponse getCarById(@PathVariable int id) throws Exception {
