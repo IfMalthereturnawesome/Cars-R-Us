@@ -71,7 +71,7 @@ public class CarController {
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/car/{id}")
     ResponseEntity<Boolean> deleteCar(@PathVariable int id) throws Exception {
         carService.deleteCar(id);
         return new ResponseEntity<>(true, HttpStatus.OK);
